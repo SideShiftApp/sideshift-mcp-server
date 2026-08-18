@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: SideShift account or product support
+    url: https://sideshift.app/contact
+    about: Get help with a SideShift account or the hosted product.
+  - name: Private security report
+    url: https://github.com/SideShiftApp/sideshift-mcp-server/security/advisories/new
+    about: Report a vulnerability privately. Do not disclose it in a public issue.

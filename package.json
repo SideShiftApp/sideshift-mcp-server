@@ -1,0 +1,15 @@
+{
+  "name": "@sideshift/cursor-plugin",
+  "version": "1.0.0",
+  "private": true,
+  "description": "The official SideShift MCP plugin for Cursor.",
+  "license": "Apache-2.0",
+  "scripts": {
+    "check": "node scripts/validate-plugin.mjs",
+    "smoke": "node scripts/smoke-mcp.mjs",
+    "test": "npm run check"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}
