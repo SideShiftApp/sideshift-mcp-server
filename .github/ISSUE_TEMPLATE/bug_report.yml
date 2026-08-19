@@ -1,0 +1,48 @@
+name: Plugin bug
+description: Report a reproducible problem with the SideShift Cursor plugin.
+title: "[Bug]: "
+labels:
+  - bug
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Do not include access tokens, cookies, personal data, company data, or vulnerability details. Use the Security tab for vulnerabilities.
+  - type: input
+    id: cursor-version
+    attributes:
+      label: Cursor version
+      placeholder: "For example: 2.6.0"
+    validations:
+      required: true
+  - type: input
+    id: plugin-version
+    attributes:
+      label: SideShift plugin version
+      placeholder: "For example: 1.0.0"
+    validations:
+      required: true
+  - type: textarea
+    id: summary
+    attributes:
+      label: What happened?
+      description: Include the expected result and the actual result without private data.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Reproduction steps
+      placeholder: |
+        1. Install the plugin...
+        2. Run...
+        3. Observe...
+    validations:
+      required: true
+  - type: textarea
+    id: request-id
+    attributes:
+      label: Sanitized request ID or error
+      description: Include a SideShift request ID or redacted error if available. Never include credentials.
+    validations:
+      required: false

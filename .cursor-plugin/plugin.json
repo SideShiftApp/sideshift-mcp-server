@@ -1,0 +1,33 @@
+{
+  "name": "sideshift",
+  "displayName": "SideShift",
+  "version": "1.0.0",
+  "description": "Operate your SideShift company from Cursor—manage campaigns, creators, applications, content, contracts, recruiting, messages, payouts, and more through secure OAuth.",
+  "author": {
+    "name": "SideShift",
+    "email": "neev@sideshift.app"
+  },
+  "publisher": "SideShift",
+  "homepage": "https://docs.sideshift.app/mcp-server",
+  "repository": "https://github.com/SideShiftApp/sideshift-mcp-server",
+  "license": "Apache-2.0",
+  "logo": "assets/logo.png",
+  "keywords": [
+    "sideshift",
+    "mcp",
+    "creator-economy",
+    "campaigns",
+    "creators",
+    "influencer-marketing",
+    "recruiting"
+  ],
+  "category": "business",
+  "tags": [
+    "mcp",
+    "oauth",
+    "creator-economy",
+    "campaign-management",
+    "recruiting"
+  ],
+  "mcpServers": "./mcp.json"
+}
