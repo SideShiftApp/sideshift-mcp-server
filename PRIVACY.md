@@ -1,20 +1,30 @@
 # Privacy and data handling
 
-Last updated: August 18, 2026
+Last updated: August 21, 2026
 
-This repository contains the open-source SideShift plugin package for Cursor. It contains configuration and agent guidance; it does not contain a local MCP runtime, analytics SDK, advertising SDK, tracking pixel, or telemetry script.
+This repository contains the open-source SideShift plugin package for Cursor, ChatGPT, Codex,
+Claude, and other MCP-compatible hosts. It contains configuration and agent guidance; it does not
+contain a local MCP runtime, analytics SDK, advertising SDK, tracking pixel, or telemetry script.
 
 ## Data flow
 
-When the SideShift MCP server is enabled, Cursor sends MCP protocol requests directly to `https://app.sideshift.app/api/mcp`. SideShift authenticates the user through a browser-based OAuth 2.1 flow and binds the resulting authorization to the company and scopes the user approves.
+When the SideShift MCP server is enabled, the host sends MCP protocol requests directly to
+`https://app.sideshift.app/api/mcp`. SideShift authenticates the user through a browser-based
+OAuth 2.1 flow and binds the resulting authorization to the company and scopes the user approves.
+The same endpoint and OAuth server are used by the Cursor, ChatGPT, Codex, and Claude packages;
+the package does not create a host-specific data path.
 
-The plugin repository does not receive or store credentials or SideShift company data. Cursor and SideShift may process data needed to provide their respective services under their own terms and privacy policies.
+The plugin repository does not receive or store credentials or SideShift company data. Each host
+and SideShift may process data needed to provide their respective services under their own terms
+and privacy policies. The plugin's skills instruct the agent to keep data within the authorized
+company context and not to expose secrets or unnecessary personal information.
 
 ## Access controls
 
 - No secret is committed in `mcp.json` or requested by the bundled skill.
 - The MCP server enforces the authenticated user's company and granted OAuth scopes.
-- Users can disable or uninstall the plugin in Cursor and revoke the SideShift authorization from their SideShift account.
+- Users can disable or uninstall the plugin in their host and revoke the SideShift authorization
+  from their SideShift account.
 - The plugin's instructions require confirmation before consequential writes and state verification before retrying uncertain outcomes.
 
 ## Policies and questions

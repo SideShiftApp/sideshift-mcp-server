@@ -1,7 +1,7 @@
 {
   "name": "sideshift",
   "displayName": "SideShift",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Operate your SideShift company from Cursor—manage campaigns, creators, applications, content, contracts, recruiting, messages, payouts, and more through secure OAuth.",
   "author": {
     "name": "SideShift",

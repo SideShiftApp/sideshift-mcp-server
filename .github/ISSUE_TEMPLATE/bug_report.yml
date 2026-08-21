@@ -9,17 +9,17 @@ body:
       value: |
         Do not include access tokens, cookies, personal data, company data, or vulnerability details. Use the Security tab for vulnerabilities.
   - type: input
-    id: cursor-version
+    id: host-version
     attributes:
-      label: Cursor version
-      placeholder: "For example: 2.6.0"
+      label: Host and version
+      placeholder: "For example: Claude Code 2.1.217 or Cursor 2.6.0"
     validations:
       required: true
   - type: input
     id: plugin-version
     attributes:
       label: SideShift plugin version
-      placeholder: "For example: 1.0.0"
+      placeholder: "For example: 1.1.0"
     validations:
       required: true
   - type: textarea

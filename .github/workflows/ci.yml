@@ -15,7 +15,7 @@ concurrency:
 
 jobs:
   validate:
-    name: Validate plugin
+    name: Validate cross-marketplace plugin package
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
@@ -27,5 +27,5 @@ jobs:
         with:
           node-version: 22
 
-      - name: Validate marketplace package
+      - name: Validate Cursor, OpenAI, and Claude package metadata
         run: npm run check

@@ -1,0 +1,27 @@
+{
+  "name": "sideshift",
+  "displayName": "SideShift",
+  "version": "1.1.0",
+  "description": "Connect Claude to SideShift, the end-to-end UGC and influencer marketing platform, through secure OAuth.",
+  "author": {
+    "name": "SideShift",
+    "email": "neev@sideshift.app",
+    "url": "https://sideshift.app"
+  },
+  "homepage": "https://docs.sideshift.app/mcp-server",
+  "repository": "https://github.com/SideShiftApp/sideshift-mcp-server",
+  "license": "Apache-2.0",
+  "keywords": [
+    "sideshift",
+    "mcp",
+    "ugc",
+    "influencer-marketing",
+    "creator-economy",
+    "creator-discovery",
+    "campaign-management",
+    "recruiting"
+  ],
+  "skills": "./skills/",
+  "commands": "./commands/",
+  "mcpServers": "./.mcp.json"
+}

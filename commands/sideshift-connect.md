@@ -6,7 +6,7 @@ description: Connect SideShift through browser-based OAuth, verify the selected 
 # Connect SideShift
 
 1. Check whether the `sideshift` MCP server and its `whoami` tool are available.
-2. If they are available, call `whoami`. The first call may open SideShift's OAuth consent flow in the user's browser.
+2. If they are available, call `whoami`. The first call may open SideShift's OAuth consent flow in the user's browser or host connection UI.
 3. Ask the user to complete sign-in, choose the intended company, review the requested scopes, and approve. Do not ask the user to paste any token or secret into chat.
 4. After authorization completes, call `whoami` again.
 5. Report:
@@ -16,4 +16,4 @@ description: Connect SideShift through browser-based OAuth, verify the selected 
    - any missing scope that requires reauthorization.
 6. Do not perform another SideShift action until the user confirms that the reported company is the intended one.
 
-If the SideShift MCP server is unavailable, ask the user to open **Cursor → Customize → Installed → SideShift**, enable the MCP server, and run **Developer: Reload Window**. Then retry `whoami`. Do not edit Cursor's plugin cache, add a second manual MCP definition, or create an API-key fallback.
+If the SideShift MCP server is unavailable, ask the user to enable or reinstall the SideShift plugin in the current host and reload its plugins/connections, then retry `whoami`. Do not add a second manual MCP definition or create an API-key fallback.
