@@ -6,7 +6,7 @@ Please use this repository's **Security** tab and its private vulnerability repo
 
 Include the affected endpoint or source path, reproduction steps, impact, and any suggested mitigation. Do not include live access tokens, refresh tokens, cookies, private keys, client secrets, personal data, or production company data. SideShift will acknowledge the report and coordinate disclosure after a fix is available.
 
-If GitHub private vulnerability reporting is temporarily unavailable, contact `neev@sideshift.app` with the subject **Private security report: SideShift Cursor plugin** and ask for a secure reporting channel before sending sensitive details.
+If GitHub private vulnerability reporting is temporarily unavailable, contact `neev@sideshift.app` with the subject **Private security report: SideShift MCP plugin** and ask for a secure reporting channel before sending sensitive details.
 
 For account, billing, or product support that is not a software vulnerability, use [SideShift Contact](https://sideshift.app/contact).
 

@@ -1,0 +1,51 @@
+{
+  "name": "sideshift",
+  "version": "1.1.0",
+  "description": "Connect ChatGPT and Codex to SideShift, the end-to-end UGC and influencer marketing platform, through secure OAuth.",
+  "author": {
+    "name": "SideShift",
+    "email": "neev@sideshift.app",
+    "url": "https://sideshift.app"
+  },
+  "homepage": "https://docs.sideshift.app/mcp-server",
+  "repository": "https://github.com/SideShiftApp/sideshift-mcp-server",
+  "license": "Apache-2.0",
+  "keywords": [
+    "sideshift",
+    "mcp",
+    "ugc",
+    "influencer-marketing",
+    "creator-economy",
+    "creator-discovery",
+    "campaign-management",
+    "recruiting"
+  ],
+  "skills": "./skills/",
+  "mcpServers": "./.mcp.json",
+  "interface": {
+    "displayName": "SideShift",
+    "shortDescription": "Run UGC and influencer campaigns with SideShift.",
+    "longDescription": "SideShift is an end-to-end UGC and influencer marketing platform for brands and agencies. Connect ChatGPT or Codex to your authorized SideShift workspace to discover and recruit creators, plan campaigns, manage applications and offers, review content, coordinate deliverables and contracts, analyze performance, and inspect payout status through the same secure OAuth-protected MCP server used by SideShift integrations.",
+    "developerName": "SideShift",
+    "category": "Business",
+    "capabilities": [
+      "MCP",
+      "OAuth",
+      "UGC campaigns",
+      "Influencer marketing",
+      "Creator discovery",
+      "Campaign analytics"
+    ],
+    "websiteURL": "https://sideshift.app",
+    "privacyPolicyURL": "https://sideshift.app/privacy-policy",
+    "termsOfServiceURL": "https://sideshift.app/terms-of-service",
+    "defaultPrompt": [
+      "Find creators for my next UGC campaign.",
+      "Summarize my active SideShift campaigns.",
+      "Review campaign content and flag follow-ups."
+    ],
+    "brandColor": "#111827",
+    "composerIcon": "./assets/logo.png",
+    "logo": "./assets/logo.png"
+  }
+}

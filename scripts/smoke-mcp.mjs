@@ -5,7 +5,7 @@ import process from "node:process";
 const endpoint = "https://app.sideshift.app/api/mcp";
 const protectedResourceUrl = "https://app.sideshift.app/.well-known/oauth-protected-resource/api/mcp";
 const authorizationServerUrl = "https://app.sideshift.app/.well-known/oauth-authorization-server";
-const headers = { "User-Agent": "sideshift-cursor-plugin-smoke/1.0" };
+const headers = { "User-Agent": "sideshift-mcp-plugin-smoke/1.1" };
 
 function assert(condition, message) {
   if (!condition) throw new Error(message);
@@ -32,7 +32,7 @@ async function main() {
       params: {
         protocolVersion: "2025-06-18",
         capabilities: {},
-        clientInfo: { name: "sideshift-cursor-plugin-smoke", version: "1.0.0" },
+        clientInfo: { name: "sideshift-mcp-plugin-smoke", version: "1.1.0" },
       },
     }),
     redirect: "error",

@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "sideshift": {
+      "type": "http",
+      "url": "https://app.sideshift.app/api/mcp"
+    }
+  }
+}
