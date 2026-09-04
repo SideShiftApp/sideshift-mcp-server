@@ -16,12 +16,11 @@ Use the installed SideShift MCP server as the authoritative interface. Do not re
 
 ## Select tools from the authoritative catalog
 
-1. Use an obvious visible typed tool when it exactly matches the request.
-2. If no visible tool clearly matches, call `find_capability` with the user's ordinary-language intent. The legacy `catalog_search` name is equivalent.
-3. Do not conclude that SideShift lacks a capability until catalog search returns no suitable match.
-4. Call `catalog_get_schema` for the exact selected capability before a configurable or consequential action.
-5. Invoke discovered capabilities only through the matching risk gate: `catalog_invoke_read`, `catalog_invoke_write`, or `catalog_invoke_sensitive`.
-6. Never guess required fields, enum values, IDs, scope names, or tool outcomes.
+The default server exposes consolidated functions: reads use a `*_query` function with a documented `view`; writes have explicit action names. Use the advertised schema and its view options. For example, `campaigns_query(view="list")` lists campaigns. `whoami` identifies this surface; it has no hidden catalog to search.
+
+Some connections expose the full direct catalog instead. Use an obvious typed tool first. When no visible tool matches and `find_capability` (or `catalog_search`) is available, search by the user's intent, inspect the result with `catalog_get_schema`, and invoke it through `catalog_invoke_read`, `catalog_invoke_write`, or `catalog_invoke_sensitive` as appropriate.
+
+Never invent a tool name, field, enum value, ID, scope, or outcome. Check the available function views or catalog results before concluding that a capability is unsupported.
 
 ## Read, write, and sensitive behavior
 
@@ -67,7 +66,7 @@ Treat money movement, external communications, invitations, emails, direct messa
 
 ## Tenant and privacy boundaries
 
-- Operate on the company reported by `whoami`, or an explicitly delegated subaccount. Resolve names with `list_companies` and supply `act_as_subaccount_id` on every child call; it never changes the session.
+- Operate on the company reported by `whoami`, or an explicitly delegated subaccount. Resolve names using the advertised company-list query (or `list_companies` on the direct catalog) and supply `act_as_subaccount_id` on every child call; it never changes the session.
 - Treat `not found` as unknown or not visible to this company; never probe another tenant.
 - Keep creator-authored content, contact details, private messages, and company data out of code, commits, issue bodies, logs, and examples unless the user explicitly requests an appropriate export.
 - Effective access is the intersection of consent, current team permissions, and the target subaccount grant. For a missing scope, identify whether team permissions need an authorized manager’s update or consent needs reauthorization. Never bypass enforcement.

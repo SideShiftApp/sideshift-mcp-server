@@ -6,6 +6,7 @@ All notable changes to the SideShift MCP plugin package are documented here.
 
 - Document shared team, OAuth and MCP scope ceilings and live permission changes.
 - Explain agency delegation, per-call subaccount selection, and company switching.
+- Match the default consolidated query functions while retaining full-catalog guidance.
 - Distinguish authentication, permission, billing and tenant errors during setup.
 - Honor existing explicit authorization while retaining precise sensitive-action approval.
 - Bound discovery smoke requests and cover four MCP protocol versions, refresh support,
