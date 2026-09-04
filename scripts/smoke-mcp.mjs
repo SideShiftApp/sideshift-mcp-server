@@ -1,11 +1,14 @@
 #!/usr/bin/env node
 
 import process from "node:process";
+import { readFile } from "node:fs/promises";
+
+const { version } = JSON.parse(await readFile(new URL("../package.json", import.meta.url), "utf8"));
 
 const endpoint = "https://app.sideshift.app/api/mcp";
 const protectedResourceUrl = "https://app.sideshift.app/.well-known/oauth-protected-resource/api/mcp";
 const authorizationServerUrl = "https://app.sideshift.app/.well-known/oauth-authorization-server";
-const headers = { "User-Agent": "sideshift-mcp-plugin-smoke/1.1" };
+const headers = { "User-Agent": `sideshift-mcp-plugin-smoke/${version}` };
 
 function assert(condition, message) {
   if (!condition) throw new Error(message);
@@ -18,7 +21,9 @@ async function readJson(response, label) {
 }
 
 async function main() {
+  for (const protocolVersion of ["2024-11-05", "2025-03-26", "2025-06-18", "2025-11-25"]) {
   const challengeResponse = await fetch(endpoint, {
+    signal: AbortSignal.timeout(15_000),
     method: "POST",
     headers: {
       ...headers,
@@ -30,9 +35,9 @@ async function main() {
       id: 1,
       method: "initialize",
       params: {
-        protocolVersion: "2025-06-18",
+        protocolVersion,
         capabilities: {},
-        clientInfo: { name: "sideshift-mcp-plugin-smoke", version: "1.1.0" },
+        clientInfo: { name: "sideshift-mcp-plugin-smoke", version },
       },
     }),
     redirect: "error",
@@ -46,7 +51,9 @@ async function main() {
   assert(challengeBody?.jsonrpc === "2.0", "MCP challenge is not a JSON-RPC response");
   assert(challengeBody?.error?.code === -32001, `MCP challenge returned unexpected error code: ${challengeBody?.error?.code}`);
 
-  const resourceResponse = await fetch(protectedResourceUrl, { headers, redirect: "error" });
+  }
+
+  const resourceResponse = await fetch(protectedResourceUrl, { headers, redirect: "error", signal: AbortSignal.timeout(15_000) });
   assert(resourceResponse.ok, `Protected-resource metadata returned ${resourceResponse.status}`);
   const resource = await readJson(resourceResponse, "Protected-resource metadata");
   assert(resource.resource === endpoint, `Protected resource must be ${endpoint}`);
@@ -54,7 +61,9 @@ async function main() {
   assert(Array.isArray(resource.bearer_methods_supported) && resource.bearer_methods_supported.includes("header"), "Protected resource must support bearer tokens in the Authorization header");
   assert(Array.isArray(resource.scopes_supported) && resource.scopes_supported.length > 0, "Protected resource did not advertise any scopes");
 
-  const authorizationResponse = await fetch(authorizationServerUrl, { headers, redirect: "error" });
+  assert(!resource.scopes_supported.some((scope) => ["*", "offline_access", "performance:read"].includes(scope)), "Protected-resource metadata must expose only public capabilities");
+
+  const authorizationResponse = await fetch(authorizationServerUrl, { headers, redirect: "error", signal: AbortSignal.timeout(15_000) });
   assert(authorizationResponse.ok, `Authorization-server metadata returned ${authorizationResponse.status}`);
   const authorization = await readJson(authorizationResponse, "Authorization-server metadata");
   assert(authorization.issuer === "https://app.sideshift.app", "Authorization server has the wrong issuer");
@@ -64,7 +73,11 @@ async function main() {
   assert(authorization.code_challenge_methods_supported?.includes("S256"), "Authorization server must advertise PKCE S256");
   assert(authorization.token_endpoint_auth_methods_supported?.includes("none"), "Authorization server must allow public OAuth clients");
 
-  console.log(`Live MCP discovery verified: 401 Bearer challenge, protected resource, OAuth issuer, DCR, and PKCE S256 (${resource.scopes_supported.length} advertised scopes).`);
+  assert(authorization.grant_types_supported?.includes("refresh_token"), "Authorization server must support refresh tokens");
+  assert(resource.scopes_supported.every((scope) => authorization.scopes_supported?.includes(scope)), "Resource scopes must be recognized by the authorization server");
+
+  // Discovery checks do not establish authenticated host interoperability.
+  console.log(`Live MCP discovery verified: 401 Bearer challenges for four protocol versions, protected resource, OAuth issuer, DCR, and PKCE S256 (${resource.scopes_supported.length} advertised scopes).`);
 }
 
 try {

@@ -2,6 +2,17 @@
 
 All notable changes to the SideShift MCP plugin package are documented here.
 
+## 1.2.0
+
+- Document shared team, OAuth and MCP scope ceilings and live permission changes.
+- Explain agency delegation, per-call subaccount selection, and company switching.
+- Match the default consolidated query functions while retaining full-catalog guidance.
+- Distinguish authentication, permission, billing and tenant errors during setup.
+- Honor existing explicit authorization while retaining precise sensitive-action approval.
+- Bound discovery smoke requests and cover four MCP protocol versions, refresh support,
+  public scope discovery, and authorization-server metadata consistency.
+- Validate manifest versions against package.json.
+
 ## 1.1.0 - 2026-08-21
 
 - Add the OpenAI universal plugin manifest for ChatGPT and Codex.

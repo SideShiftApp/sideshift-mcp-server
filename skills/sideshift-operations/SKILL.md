@@ -16,12 +16,11 @@ Use the installed SideShift MCP server as the authoritative interface. Do not re
 
 ## Select tools from the authoritative catalog
 
-1. Use an obvious visible typed tool when it exactly matches the request.
-2. If no visible tool clearly matches, call `find_capability` with the user's ordinary-language intent. The legacy `catalog_search` name is equivalent.
-3. Do not conclude that SideShift lacks a capability until catalog search returns no suitable match.
-4. Call `catalog_get_schema` for the exact selected capability before a configurable or consequential action.
-5. Invoke discovered capabilities only through the matching risk gate: `catalog_invoke_read`, `catalog_invoke_write`, or `catalog_invoke_sensitive`.
-6. Never guess required fields, enum values, IDs, scope names, or tool outcomes.
+The default server exposes consolidated functions: reads use a `*_query` function with a documented `view`; writes have explicit action names. Use the advertised schema and its view options. For example, `campaigns_query(view="list")` lists campaigns. `whoami` identifies this surface; it has no hidden catalog to search.
+
+Some connections expose the full direct catalog instead. Use an obvious typed tool first. When no visible tool matches and `find_capability` (or `catalog_search`) is available, search by the user's intent, inspect the result with `catalog_get_schema`, and invoke it through `catalog_invoke_read`, `catalog_invoke_write`, or `catalog_invoke_sensitive` as appropriate.
+
+Never invent a tool name, field, enum value, ID, scope, or outcome. Check the available function views or catalog results before concluding that a capability is unsupported.
 
 ## Read, write, and sensitive behavior
 
@@ -37,14 +36,14 @@ Before a reversible write:
 2. Load the authoritative schema.
 3. Gather every required value.
 4. Summarize the material arguments and expected state change.
-5. Obtain clear user confirmation.
+5. Use an existing explicit authorization when it covers this exact action; otherwise ask for confirmation of the concrete change.
 6. Execute once, then read back the resulting state when a read tool is available.
 
 ### Sensitive actions
 
 Treat money movement, external communications, invitations, emails, direct messages, credential changes, destructive operations, and other externally visible actions as sensitive even if the surrounding request seems routine.
 
-- Require explicit approval of the exact target, amount or content, and consequence immediately before execution.
+- Require explicit authorization of the exact target, amount or content, and consequence. A prior explicit instruction remains valid if those details have not changed.
 - Never infer approval from a request to draft, inspect, calculate, compare, or prepare.
 - Respect sandbox and safe-mode refusals. Do not seek an alternate path around them.
 - When a browser handoff is returned, give the link to the user and let the human complete the protected step.
@@ -67,10 +66,10 @@ Treat money movement, external communications, invitations, emails, direct messa
 
 ## Tenant and privacy boundaries
 
-- Operate only on the company reported by `whoami`.
+- Operate on the company reported by `whoami`, or an explicitly delegated subaccount. Resolve names using the advertised company-list query (or `list_companies` on the direct catalog) and supply `act_as_subaccount_id` on every child call; it never changes the session.
 - Treat `not found` as unknown or not visible to this company; never probe another tenant.
 - Keep creator-authored content, contact details, private messages, and company data out of code, commits, issue bodies, logs, and examples unless the user explicitly requests an appropriate export.
-- If a required scope is absent, explain the missing scope and ask the user to re-authorize. Never bypass scope enforcement.
+- Effective access is the intersection of consent, current team permissions, and the target subaccount grant. For a missing scope, identify whether team permissions need an authorized manager’s update or consent needs reauthorization. Never bypass enforcement.
 
 ## Completion
 
