@@ -10,7 +10,7 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const expectedEndpoint = "https://app.sideshift.app/api/mcp";
 const expectedRepository = "https://github.com/SideShiftApp/sideshift-mcp-server";
 const expectedHomepage = "https://docs.sideshift.app/mcp-server";
-const expectedVersion = "1.1.0";
+const expectedVersion = JSON.parse(await fs.readFile(path.join(root, "package.json"), "utf8")).version;
 const errors = [];
 
 function fail(message) {

@@ -37,14 +37,14 @@ Before a reversible write:
 2. Load the authoritative schema.
 3. Gather every required value.
 4. Summarize the material arguments and expected state change.
-5. Obtain clear user confirmation.
+5. Use an existing explicit authorization when it covers this exact action; otherwise ask for confirmation of the concrete change.
 6. Execute once, then read back the resulting state when a read tool is available.
 
 ### Sensitive actions
 
 Treat money movement, external communications, invitations, emails, direct messages, credential changes, destructive operations, and other externally visible actions as sensitive even if the surrounding request seems routine.
 
-- Require explicit approval of the exact target, amount or content, and consequence immediately before execution.
+- Require explicit authorization of the exact target, amount or content, and consequence. A prior explicit instruction remains valid if those details have not changed.
 - Never infer approval from a request to draft, inspect, calculate, compare, or prepare.
 - Respect sandbox and safe-mode refusals. Do not seek an alternate path around them.
 - When a browser handoff is returned, give the link to the user and let the human complete the protected step.
@@ -67,10 +67,10 @@ Treat money movement, external communications, invitations, emails, direct messa
 
 ## Tenant and privacy boundaries
 
-- Operate only on the company reported by `whoami`.
+- Operate on the company reported by `whoami`, or an explicitly delegated subaccount. Resolve names with `list_companies` and supply `act_as_subaccount_id` on every child call; it never changes the session.
 - Treat `not found` as unknown or not visible to this company; never probe another tenant.
 - Keep creator-authored content, contact details, private messages, and company data out of code, commits, issue bodies, logs, and examples unless the user explicitly requests an appropriate export.
-- If a required scope is absent, explain the missing scope and ask the user to re-authorize. Never bypass scope enforcement.
+- Effective access is the intersection of consent, current team permissions, and the target subaccount grant. For a missing scope, identify whether team permissions need an authorized manager’s update or consent needs reauthorization. Never bypass enforcement.
 
 ## Completion
 

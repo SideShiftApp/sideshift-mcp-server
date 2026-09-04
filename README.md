@@ -72,6 +72,24 @@ the exact connected company and scopes before doing work.
 Never paste an access token, refresh token, API key, cookie, or client secret into chat. Access is
 tenant-bound and scope-bound by SideShift; the plugin does not add a second authorization path.
 
+## Permissions and agencies
+
+Team members, scoped API keys, OAuth and MCP share one permission vocabulary. Read and Write are
+independent selections for each page or resource. An OAuth connection can only use scopes that
+were consented to and remain allowed by the user's current team permissions. Reducing permissions
+or removing membership also restricts existing connections. Signing contracts and withdrawing
+wallet funds have separate permissions.
+
+Agency consent can cover no subaccounts, selected subaccounts, or all current and future
+subaccounts. Inspect `whoami.subaccountAccess`, resolve child IDs with `list_companies`, and send
+`act_as_subaccount_id` on every child call. The current parent relationship and the user's child
+permissions are checked again. The connected parent stays unchanged; reconnect to choose another
+company. Never use a different company's ID to work around an access denial.
+
+A `401` calls for reconnecting. A `403 insufficient_scope` may first require an authorized team
+manager to change the member's permissions; repeating consent cannot exceed that ceiling. Use the
+server's billing handoff for `402`. A `404` means missing or invisible to this company.
+
 ## Example workflows
 
 ```text
@@ -99,7 +117,7 @@ Draft a recruitment offer and show me the exact target, terms, and side effect b
 - Call `whoami` before the first substantive operation and confirm the selected company.
 - Use the server's authoritative capability catalog when the right tool is not already visible.
 - Inspect the exact target and schema before configurable or consequential writes.
-- Show material arguments and expected side effects, then get clear user approval before a write.
+- Show material arguments and expected side effects. Proceed when the user has explicitly authorized that action; ask when the target or consequence still needs approval.
 - Treat money movement, external communications, invitations, emails, direct messages, credential
   changes, and destructive operations as sensitive even when the surrounding request sounds routine.
 - Use a stable operation or idempotency key for retryable mutations when the schema supports one.
