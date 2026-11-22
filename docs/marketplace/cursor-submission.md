@@ -13,7 +13,7 @@ Do not submit or accept the Publisher Terms until a SideShift owner has reviewed
 | Organization name | `SideShift` |
 | Organization handle | `sideshift` (confirm availability in the form) |
 | Unique namespace | `@sideshift` (confirm availability in the form) |
-| Contact email | `neev@sideshift.app` |
+| Contact email | `support@sideshift.app` |
 | Logotype URL | `https://raw.githubusercontent.com/SideShiftApp/sideshift-mcp-server/v1.1.0/assets/logo.png` |
 | Description | `SideShift is an end-to-end UGC and influencer marketing platform for brands and agencies. This plugin connects Cursor to your authorized SideShift workspace so you can discover and recruit creators, plan and manage campaigns, work with applications and offers, review content, coordinate contracts and deliverables, analyze creator and campaign performance, inspect financial records, and use the complete SideShift capability catalog through secure OAuth.` |
 | GitHub repository | `https://github.com/SideShiftApp/sideshift-mcp-server` |
