@@ -110,7 +110,7 @@ function validateCommonManifest(manifest, relativePath) {
   assert(manifest.version === expectedVersion, `${relativePath} version must be ${expectedVersion}`);
   assert(typeof manifest.description === "string" && manifest.description.length >= 80, `${relativePath} description is too short`);
   assert(manifest.author?.name === "SideShift", `${relativePath} author.name must be SideShift`);
-  assert(manifest.author?.email === "neev@sideshift.app", `${relativePath} author.email must be neev@sideshift.app`);
+  assert(manifest.author?.email === "support@sideshift.app", `${relativePath} author.email must be support@sideshift.app`);
   assert(manifest.repository === expectedRepository, `${relativePath} repository URL is incorrect`);
   assert(manifest.homepage === expectedHomepage, `${relativePath} homepage URL is incorrect`);
   assert(manifest.license === "Apache-2.0", `${relativePath} license must be Apache-2.0`);
